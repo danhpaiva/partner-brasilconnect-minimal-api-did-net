@@ -18,7 +18,7 @@ public static class DidActivationEndpoints
             {
                 DidNumber = didCreationDto.DidNumber,
                 Status = DidStatus.Pending,
-                CreatedAt = DateTime.UtcNow // Sempre use UTC
+                CreatedAt = DateTime.UtcNow
             };
 
             db.DidActivation.Add(didActivation);
