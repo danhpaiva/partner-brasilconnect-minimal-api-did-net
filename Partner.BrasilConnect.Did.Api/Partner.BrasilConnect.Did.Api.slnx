@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Partner.BrasilConnect.Did.Api.Tests/Partner.BrasilConnect.Did.Api.Tests.csproj" Id="15bd00b8-1d6e-4b33-ab3c-d718df6ca683" />
+  <Project Path="Partner.BrasilConnect.Did.Api/Partner.BrasilConnect.Did.Api.csproj" />
+</Solution>
