@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Partner.BrasilConnect.Did.Api.Data;
 using Partner.BrasilConnect.Did.Api.Endpoints;
 using Scalar.AspNetCore;
