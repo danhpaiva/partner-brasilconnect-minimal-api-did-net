@@ -1,7 +1,14 @@
 # 📡 Partner.BrasilConnect.Did.Api
 
-API responsável por gerenciar **DIDs nacionais** utilizando integração JWT com o parceiro externo **BrasilConnect**.
-O sistema permite **autenticação**, **criação**, **ativação**, **desativação** e **atualização de status** de DIDs, além de persistência em banco via **Entity Framework Core**.
+![.NET](https://img.shields.io/badge/.NET_10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+![Entity Framework Core](https://img.shields.io/badge/Entity_Framework_Core-6DB33F?style=for-the-badge&logo=ef&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+API responsável por gerenciar **DIDs internacionais**, incluindo autenticação de parceiros, geração de números, consulta de DIDs e persistência via Entity Framework Core em banco SQLite.
+
+A API foi desenvolvida utilizando boas práticas de arquitetura, separação em camadas lógicas, DTOs bem definidos e migrações controladas por EF Core.
 
 ---
 
@@ -14,33 +21,6 @@ O sistema permite **autenticação**, **criação**, **ativação**, **desativa�
 * **SQLite** (ou outro provider configurado)
 * **JWT**
 * **xUnit** (testes automatizados)
-
----
-
-## 📂 Estrutura do Projeto
-
-```
-Partner.BrasilConnect.Did.Api/
- ├── Data/
- │    └── AppDbContext.cs
- ├── DTO/
- │    ├── DidCreationDto.cs
- │    ├── DidStatusUpdateDto.cs
- │    ├── LoginRequestDto.cs
- │    └── LoginResponseDto.cs
- ├── Endpoints/
- │    ├── AuthEndpoints.cs
- │    └── DidActivationEndpoints.cs
- ├── Enum/
- │    └── DidStatus.cs
- ├── Migrations/
- ├── Models/
- │    └── DidActivation.cs
- ├── Program.cs
-Partner.BrasilConnect.Did.Api/
- └── Tests/
-      └── (xUnit test suite)
-```
 
 ---
 
@@ -64,7 +44,7 @@ A autenticação é feita via endpoint:
 
 ```json
 {
-  "token": "<jwt-token>"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwiZGlkX3Njb3BlIjoiYWN0aXZhdGlvbl93cml0ZSIsIm5iZiI6MTc2MzIzMTA2MywiZXhwIjoxNzYzMjM0NjYzLCJpYXQiOjE3NjMyMzEwNjMsImlzcyI6IlBhcnRuZXIuQnJhc2lsQ29ubmVjdC5EaWQuQXBpIiwiYXVkIjoiQ2xpZW50QXBwIn0.hezyoE-KVTkSMgkHusKnmVpy71bUZUqnNIKPsORVr2A"
 }
 ```
 
@@ -98,8 +78,20 @@ Request:
 
 ```json
 {
+  "didNumber": "+5511999999999"
+}
+```
+
+Response:
+
+```json
+{
+  "id": 2,
   "didNumber": "+5511999999999",
-  "status": "Active"
+  "status": 0,
+  "errorMessage": null,
+  "createdAt": "2025-11-15T18:25:40.5851685Z",
+  "updatedAt": null
 }
 ```
 
@@ -119,7 +111,21 @@ Request:
 
 ```json
 {
-  "status": "Suspended"
+  "status": 1,
+  "errorMessage": null
+}
+```
+
+Response:
+
+```json
+{
+  "id": 2,
+  "didNumber": "+5511999999999",
+  "status": 1,
+  "errorMessage": null,
+  "createdAt": "2025-11-15T18:25:40.5851685",
+  "updatedAt": "2025-11-15T18:26:46.8835059Z"
 }
 ```
 
@@ -213,6 +219,16 @@ dotnet restore
 dotnet ef database update
 ```
 
+Execute a migração (se necessário):
+
+```bash
+dotnet tool install --global dotnet-ef
+
+dotnet ef migrations add PrimeiraMigration
+
+dotnet ef database update
+```
+
 ### 3️⃣ Rodar o servidor
 
 ```bash
@@ -254,3 +270,13 @@ Obs.: O módulo de integração com o parceiro pode ser estendido para incluir r
 ## 📄 Licença
 
 Este projeto está sob licença MIT – sinta-se livre para utilizá-lo e modificá-lo.
+
+## 👨‍💻 Autor
+
+**Daniel Paiva**
+Desenvolvedor .NET | Professor Universitário
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/danhpaiva/)
+![Stars](https://img.shields.io/github/stars/danhpaiva/partner-worldtel-mvc-api-did-net?style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/danhpaiva/partner-worldtel-mvc-api-did-net?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/danhpaiva/partner-worldtel-mvc-api-did-net?style=for-the-badge)
