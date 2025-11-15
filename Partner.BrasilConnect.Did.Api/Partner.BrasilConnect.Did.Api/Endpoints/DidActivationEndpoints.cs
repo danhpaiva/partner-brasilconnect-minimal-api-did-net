@@ -15,7 +15,8 @@ public static class DidActivationEndpoints
 
         group.MapPost("/request", async (DidCreationDto didCreationDto, AppDbContext db) => await MapRequestDidActivation(didCreationDto, db))
         .WithName("RequestDidActivation")
-        .WithSummary("Inicia uma nova ativação de DID apenas com o número.");
+        .WithSummary("Inicia uma nova ativação de DID apenas com o número.")
+        .RequireAuthorization();
 
         group.MapPatch("/{id}/status", async Task<Results<Ok<DidActivation>, NotFound>> (int id, DidStatusUpdateDto updateDto, AppDbContext db) => await MapUpdateActivationStatus(id, updateDto, db))
         .WithName("UpdateDidActivationStatus")
