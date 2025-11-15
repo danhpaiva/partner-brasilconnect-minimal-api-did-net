@@ -1,6 +1,5 @@
 ﻿using Partner.BrasilConnect.Did.Api.Enum;
 using System.ComponentModel.DataAnnotations;
-using System.Net.NetworkInformation;
 
 namespace Partner.BrasilConnect.Did.Api.Models;
 
