@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.OpenApi;
 using Partner.BrasilConnect.Did.Api.Data;
 using Partner.BrasilConnect.Did.Api.Models;
 namespace Partner.BrasilConnect.Did.Api.Endpoints;
