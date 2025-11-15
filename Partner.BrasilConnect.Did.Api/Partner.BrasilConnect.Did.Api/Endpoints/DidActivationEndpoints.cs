@@ -20,22 +20,28 @@ public static class DidActivationEndpoints
 
         group.MapPatch("/{id}/status", async Task<Results<Ok<DidActivation>, NotFound>> (int id, DidStatusUpdateDto updateDto, AppDbContext db) => await MapUpdateActivationStatus(id, updateDto, db))
         .WithName("UpdateDidActivationStatus")
-        .WithSummary("Atualiza o status e mensagem de erro de uma ativação de DID.");
+        .WithSummary("Atualiza o status e mensagem de erro de uma ativação de DID.")
+        .RequireAuthorization();
 
         group.MapGet("/", async (AppDbContext db) => await MapGetAllDidActivations(db))
-        .WithName("GetAllDidActivations");
+        .WithName("GetAllDidActivations")
+        .RequireAuthorization();
 
         group.MapGet("/{id}", async Task<Results<Ok<DidActivation>, NotFound>> (int id, AppDbContext db) => await MapGetActivationById(id, db))
-        .WithName("GetDidActivationById");
+        .WithName("GetDidActivationById")
+        .RequireAuthorization();
 
         group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, DidActivation didActivation, AppDbContext db) => await MapUpdateActivation(id, didActivation, db))
-        .WithName("UpdateDidActivation");
+        .WithName("UpdateDidActivation")
+        .RequireAuthorization();
 
         group.MapPost("/", async (DidActivation didActivation, AppDbContext db) => await MapCreateDidActivation(didActivation, db))
-        .WithName("CreateDidActivation");
+        .WithName("CreateDidActivation")
+        .RequireAuthorization();
 
         group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, AppDbContext db) => await MapDeleteActivation(id, db))
-        .WithName("DeleteDidActivation");
+        .WithName("DeleteDidActivation")
+        .RequireAuthorization();
     }
 
     public static async Task<List<DidActivation>> MapGetAllDidActivations(AppDbContext db)
