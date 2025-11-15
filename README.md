@@ -144,11 +144,18 @@ O arquivo `AppDbContext.cs` contém:
 ```csharp
 public class DidActivation
 {
+    [Key]
     public int Id { get; set; }
+
+    [Required(ErrorMessage = "Campo DidNumber obrigatorio.")]
     public string DidNumber { get; set; }
-    public DidStatus Status { get; set; }
+
+    public DidStatus Status { get; set; } = DidStatus.Pending;
+    public string? ErrorMessage { get; set; }
     public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }
+
 ```
 
 ### Enum de Status
@@ -156,9 +163,12 @@ public class DidActivation
 ```csharp
 public enum DidStatus
 {
+    Pending,
+    InProgress,
+    WaitingValidation,
     Active,
-    Inactive,
-    Suspended
+    Failed,
+    Cancelled
 }
 ```
 
