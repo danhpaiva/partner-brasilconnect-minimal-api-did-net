@@ -1,13 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using Partner.BrasilConnect.Did.Api.DTO;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace Partner.BrasilConnect.Did.Api.Endpoints;
-
-public record LoginRequestDto(string Username, string Password);
-public record LoginResponseDto(string Token);
 
 public static class AuthEndpoints
 {

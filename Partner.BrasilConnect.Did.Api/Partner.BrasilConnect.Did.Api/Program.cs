@@ -13,12 +13,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("AppDbContext")
         ?? throw new InvalidOperationException("Connection string 'AppDbContext' not found.")));
 
-// Configure OpenAPI com segurança JWT
 builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer((document, context, cancellationToken) =>
     {
-        // Define o esquema de segurança JWT
         document.Components ??= new();
         document.Components.SecuritySchemes = new Dictionary<string, IOpenApiSecurityScheme>
         {
@@ -31,7 +29,6 @@ builder.Services.AddOpenApi(options =>
             }
         };
 
-        // Aplica o requisito de segurança globalmente
         document.Security = new List<OpenApiSecurityRequirement>
         {
             new OpenApiSecurityRequirement
@@ -87,7 +84,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 
-app.MapAuthEndpoints(); // Certifique-se de mapear os endpoints de autenticação
+app.MapAuthEndpoints();
 app.MapDidActivationEndpoints();
 
 app.Run();
