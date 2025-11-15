@@ -10,7 +10,7 @@ public class DidActivation
     public int Id { get; set; }
     [Required(ErrorMessage = "Campo DidNumber obrigatorio.")]
     public string DidNumber { get; set; }
-    public DidStatus Status { get; set; }
+    public DidStatus Status { get; set; } = DidStatus.Pending;
     public string? ErrorMessage { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
